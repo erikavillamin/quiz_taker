@@ -1,0 +1,35 @@
+Who created Python?
+a) Isaac Newton
+b) Guido van Rossum
+c) Donald Trump
+d) Albert Einstein
+Answer: b
+
+What is the process by which plants make their own food using sunlight?
+a) Transpiration
+b) Respiration
+c) Fermentation
+d) Photosynthesis
+Answer: d
+
+What does the acronym "CPU" stand for in computing?
+a) computer power unit
+b) central power unit
+c) control processing unit
+d) central processing unit
+Answer: d
+
+Which company developed the Windows operating system?
+a) apple
+b) microsoft
+c) google
+d) IBM
+Answer: b
+
+What is the force that pulls object towards the center of the Earth?
+a) Gravity
+b) Magnetism
+c) Friction
+d) Buoyancy
+Answer: a
+
