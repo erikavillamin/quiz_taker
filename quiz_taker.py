@@ -15,3 +15,10 @@ for block in blocks: # it is a loop over each question block
         print("Invalid")
         continue
     quiz_answer = answer[len('answer: '):].strip().upper  # the answer is stored as a single uppercase letter as correct answer
+
+    quiz.append({
+        'question': question,
+        'choices' : choices,
+        'answer' : answer
+    })
+
