@@ -7,7 +7,7 @@ quiz = []
 for block in blocks: # it is a loop over each question block
     lines = block.strip().split('\n')  #this will split the block into separate lines
 
-    question = lines[0][len("Question: "):] # extract question
+    question = lines[0].replace("Question: ", "").strip() 
     choices = lines[1:5]  # four lines after question
 
     answer = lines[5]  #ensure the line for answer is correctly formatted 
