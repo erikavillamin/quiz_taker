@@ -12,14 +12,14 @@ for block in blocks: # it is a loop over each question block
 
     answer = lines[5]  #ensure the line for answer is correctly formatted 
     if not answer.lower().startswith('answer: '): # the line should start with answer, skip if not
-        print("Invalid")
+        print("Invalid", answer)
         continue
-    quiz_answer = answer[len('answer: '):].strip().upper  # the answer is stored as a single uppercase letter as correct answer
+    quiz_answer = answer.replace("Answer: ", "").strip().upper() # the answer is stored as a single uppercase letter as correct answer
 
     quiz.append({
         'question': question,
         'choices' : choices,
-        'answer' : answer
+        'answer' : quiz_answer
     })
 
 score = 0
@@ -33,7 +33,7 @@ for question_index, question in enumerate(quiz, 1):  # for loop through each que
         print("Correct!")  
         score += 1  # increment score for right answer
     else:
-        print(f" Wrong. Correct answer: {question['answer']}") 
+        print(f"Wrong. Correct answer: {question['answer']}") 
 
 print(f"\n Quiz Finished! Your score: {score}/{len(quiz)}")  # print final score
 
