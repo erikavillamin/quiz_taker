@@ -22,3 +22,8 @@ for block in blocks: # it is a loop over each question block
         'answer' : answer
     })
 
+score = 0
+for question_index, question in enumerate(quiz, 1):  # for loop through each question
+    print(f"\nQuestion {question_index}: {question_data['question']}")  # print question
+    for choice in question['choices']:  # print choices
+        print(choice)
