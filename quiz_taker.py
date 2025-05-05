@@ -24,6 +24,17 @@ for block in blocks: # it is a loop over each question block
 
 score = 0
 for question_index, question in enumerate(quiz, 1):  # for loop through each question
-    print(f"\nQuestion {question_index}: {question_data['question']}")  # print question
+    print(f"\nQuestion {question_index}: {question['question']}")  # print question
     for choice in question['choices']:  # print choices
         print(choice)
+    
+    user_answer = input("Your answer (A/B/C/D): ").strip().upper()  # get user's answer
+    if user_answer == question['answer']:  # check if user's answer is correct
+        print("Correct!")  
+        score += 1  # increment score for right answer
+    else:
+        print(f" Wrong. Correct answer: {question['answer']}") 
+
+print(f"\n Quiz Finished! Your score: {score}/{len(quiz)}")  # print final score
+
+ 
