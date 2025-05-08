@@ -2,16 +2,19 @@
 import emoji
 with open("quiz_creator_questions.txt", "a") as file: # This will open the file and add the users input without deleting the old content
     
-    while True: # A loop that allow user to input many questions 
+    while True: 
         quiz_question = input(emoji.emojize("Enter a question:thinking_face:: ")) #Ask the user the questions they want to input
+        if not quiz_question.lower().startswith("question:"):
+                quiz_question = "Question: " + quiz_question
+                
         # These are the choices or possible answers to the question
-        letter_a = input(emoji.emojize("Enter letter a :red_apple:: "))
-        letter_b = input(emoji.emojize("Enter letter b :boy:: "))
-        letter_c = input(emoji.emojize("Enter letter c :cow:: "))
-        letter_d = input(emoji.emojize("Enter letter d :dog:: "))
+        letter_a = input(emoji.emojize("Enter letter a :red_apple:: ")).strip()
+        letter_b = input(emoji.emojize("Enter letter b :boy:: ")).strip()
+        letter_c = input(emoji.emojize("Enter letter c :cow:: ")).strip()
+        letter_d = input(emoji.emojize("Enter letter d :dog:: ")).strip()
         
         while True: # This is a nested loop to validate correct answer
-            correct_ans = input(emoji.emojize("What letter is the correct answer?:thinking_face: "))
+            correct_ans = input(emoji.emojize("What letter is the correct answer?:thinking_face: ")).strip().lower()
             if correct_ans in ['a', 'b', 'c', 'd']:
                 break  # Exit loop
             else:
