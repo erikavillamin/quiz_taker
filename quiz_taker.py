@@ -1,6 +1,10 @@
 import tkinter as tk
 import random
 
+background_color = "#FFFFFF"  # white
+text_color = "#000000"    # black
+accent_color = "#FF8C00"    # orange
+
 file_name = "quiz_creator_questions.txt"
 with open(file_name, 'r') as file: # open and read file
     questions = file.read().strip()
@@ -30,6 +34,7 @@ class QuizTakerApp:   # define class
     def __init__(self, app_window, quiz_questions):  # initialize
         self.app_window = app_window
         self.app_window.title("Quiz Taker App")
+        self.app_window.configure(bg=background_color)
         self.quiz_questions = quiz_questions
         self.current_question_index = 0  # keep track of current question
         self.total_score = 0 # track score
@@ -37,7 +42,7 @@ class QuizTakerApp:   # define class
 
         self.question_text_label = tk.Label(
             app_window, text="", wraplength=400, # if text is long, it will wrap to a new line after 400 px
-            font=("Arial", 14, "bold") # font, size, and style for label text
+            font=("Arial", 14, "bold"), bg=background_color, fg=accent_color # font, size, and style for label text
         )
         self.question_text_label.pack(pady=20) # provide padding
 
@@ -45,23 +50,27 @@ class QuizTakerApp:   # define class
         for option_index in range(4): 
             option_button = tk.Radiobutton(
                 app_window, text="", variable=self.selected_option, value="", #link all radio buttons to one variable
-                font=("Arial", 12), anchor='w', justify='left' # font style and size for buttons
+                font=("Arial", 12), anchor='w', justify='left', # font style and size for buttons
+                bg=background_color, fg=text_color, selectcolor=background_color,
+                activeforeground=accent_color
             )
             option_button.pack(fill='x', padx=20, pady=2) # place buttons in window with spacing
             self.answer_option_buttons.append(option_button)
 
         self.answer_feedback_label = tk.Label(  # label for feedback
-            app_window, text="", font=("Arial", 12)
+            app_window, text="", font=("Arial", 12),
+            bg=background_color, fg=text_color
         )
         self.answer_feedback_label.pack()
 
         self.submit_button = tk.Button( #submit button
             app_window, text="Submit", command=self.submit_answer,
-            font=('Arial', 12)  # font size and style
+            font=('Arial', 12), bg=accent_color, fg=background_color, activebackground="#ffa733"  # font size and style
         )
         self.submit_button.pack(pady=20)  
         self.final_result_label = tk.Label(
-            app_window, text="", font=("Arial", 16, "bold")
+            app_window, text="", font=("Arial", 16, "bold"),
+            bg=background_color, fg=accent_color
         )
         self.final_result_label.pack(pady=10) # display final score
 
@@ -97,13 +106,53 @@ class QuizTakerApp:   # define class
             button.pack_forget()
         self.submit_button.pack_forget()
         self.answer_feedback_label.pack_forget()
-        self.final_result_label.config(
-            text=(f"Your score: {self.total_score}/{len(self.quiz_questions)}")
-        )
 
-app_window = tk.Tk() # run gui
+        total_questions = len(self.quiz_questions)
+        percentage = (self.total_score / total_questions) * 100
+
+        if percentage >= 80:
+            feedback_text = "Excellent work!"
+            score_color = "#28a745" #green
+        elif percentage >= 50:
+            feedback_text = "Good job!"
+            score_color = "#FFA500" #orange
+        else:
+            feedback_text = "Better luck next time!"
+            score_color = "#FF4C4C" #red
+        
+        result_frame = tk.Frame(self.app_window, bg=background_color, bd=2, relief="ridge")
+        result_frame.pack(pady=20, padx=30)
+
+        result_label = tk.Label(
+             result_frame,
+             text=f"Your Score: {self.total_score}/{total_questions} ({int(percentage)}%)\n{feedback_text}",
+             font=("Arial", 16, "bold"),
+             fg=score_color,
+             bg=background_color,
+             justify="center"
+        )      
+        result_label.pack(padx=20, pady=20)
+        
+        restart_button = tk.Button(     # restart
+            self.app_window,
+            text="Retake Quiz",
+            font=('Arial', 12),
+            bg=accent_color,
+            fg=background_color,
+            activebackground="#ffa733",
+            command=self.restart_quiz
+        )
+        restart_button.pack(pady=10)
+        
+    def restart_quiz(self):
+        self.current_question_index = 0
+        self.total_score = 0
+        for widget in self.app_window.winfo_children():
+            widget.destroy()
+        self.__init__(self.app_window, self.quiz_questions)
+
+app_window = tk.Tk()
 app_window.geometry("500x450")
 app = QuizTakerApp(app_window, quiz)
 app_window.mainloop()
-
 
