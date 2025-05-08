@@ -34,3 +34,19 @@ class quiz_taker_app:   # define class
         self_current_questions_index = 0  # keep track of current question
         self.total_score = 0 # track score
         self.selected_option = tk.StringVar()  #store answer
+
+        self.question_txt_label = tk.Label(
+            app_window, text="", wraplength=400, # if text is long, it will wrap to a new line after 400 px
+            font=("Arial", 14, "bold") # font, size, and style for label text
+        )
+        self.question_txt_label.pack(pady=20) # provide padding
+
+        self.answer_option_buttons = [] # empty list that hold choices buttons
+        for option_index in range(4): 
+            option_button = tk.Radiobutton(
+                app_window, text="", variable=self.selected_option, value="", #link all radio buttons to one variable
+                font=("Arial", 12), anchor='w', justify='left' # font style and size for buttons
+            )
+            option_button.pack(fill='x', padx=20, pady=2) # place buttons in window with spacing
+            self.answer_option_buttons.append(option_button)
+
