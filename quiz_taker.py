@@ -1,3 +1,4 @@
+import tkinter as tk
 import random
 
 file_name = "quiz_creator_questions.txt"
@@ -25,20 +26,11 @@ for block in blocks: # it is a loop over each question block
     })
 
 random.shuffle(quiz)
-score = 0
-for question_index, question in enumerate(quiz, 1):  # for loop through each question
-    print(f"\nQuestion {question_index}: {question['question']}")  # print question
-    for choice in question['choices']:  # print choices
-        print(choice)
-    
-    user_answer = input("Your answer: ").strip().upper()  # get user's answer
-    if user_answer == question['answer']:  # check if user's answer is correct
-        print("Correct!")  
-        score += 1  # increment score for right answer
-    else:
-        print(f"Wrong. Correct answer: {question['answer']}") 
-
-print(f"\nQuiz Finished! Your score: {score}/{len(quiz)}")  # print final score
-
-
- 
+class quiz_taker_app:   # define class
+    def __init__(self, app_window, quiz_questions):  # initialize
+        self.app_window = app_window
+        self.app_window_title("Quiz Taker App")
+        self.quiz_questions = quiz_questions
+        self_current_questions_index = 0  # keep track of current question
+        self.total_score = 0 # track score
+        self.selected_option = tk.StringVar()  #store answer
