@@ -89,3 +89,13 @@ class QuizTakerApp:   # define class
         self.current_question_index += 1
         self.display_next_question()
 
+    def display_final_score(self):  # display result
+        self.question_text_label.config(text="Quiz Finished!")
+        for button in self.answer_option_buttons:
+            button.pack_forget()
+        self.submit_button.pack_forget()
+        self.answer_feedback_label.pack_forget()
+        self.final_result_label.config(
+            text=(f"Your score: {self.total_score}/{len(self.quiz_questions)}")
+        )
+
