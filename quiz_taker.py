@@ -50,3 +50,19 @@ class quiz_taker_app:   # define class
             option_button.pack(fill='x', padx=20, pady=2) # place buttons in window with spacing
             self.answer_option_buttons.append(option_button)
 
+        self.answer_feedback_label = tk.Label(  # label for feedback
+            app_window, text="", font=("Arial", 12)
+        )
+        self.answer_feedback_label.pack()
+
+        self.submit_button = tk.Button( #submit button
+            app_window, text="Submit", command=self.submit_answer,
+            font=('Arial', 12)  # font size and style
+        )
+        self.submit_button.pack(pady=20)  
+        self.final_result_label = tk.Label(
+            app_window, text="", font=("Arial", 16, "bold")
+        )
+        self.final_result_label.pack(pady=10) # display final score
+    
+
