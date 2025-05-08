@@ -26,7 +26,7 @@ for block in blocks: # it is a loop over each question block
     })
 
 random.shuffle(quiz)
-class quiz_taker_app:   # define class
+class QuizTakerApp:   # define class
     def __init__(self, app_window, quiz_questions):  # initialize
         self.app_window = app_window
         self.app_window_title("Quiz Taker App")
@@ -64,5 +64,21 @@ class quiz_taker_app:   # define class
             app_window, text="", font=("Arial", 16, "bold")
         )
         self.final_result_label.pack(pady=10) # display final score
+    
+    def display_next_question(self): # display next questions and choices
+        self.answer_feedback_label.config(text="")
+        if self.current_question_index >= len(self.quiz_questions):
+            self.display_final_score()
+            return
+        self.selected_option.set(None) # clears selected option before display next question
+        current_question = self.quiz_questions[self.current_question_index]
+        self.question_text_label.config(
+            text=(f"Q{self.current_question_index + 1}: {current_question['question']}")
+        ) 
+        for button_index, choice in enumerate(current_question['choices']): # update each ansswer option button with corresponding choices
+            choice_value = choice[0].upper()
+            self.answer_option_buttons[button_index].config(
+                text=choice, value=choice_value, state=tk.NORMAL
+            )
     
 
