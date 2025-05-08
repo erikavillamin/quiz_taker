@@ -29,17 +29,17 @@ random.shuffle(quiz)
 class QuizTakerApp:   # define class
     def __init__(self, app_window, quiz_questions):  # initialize
         self.app_window = app_window
-        self.app_window_title("Quiz Taker App")
+        self.app_window.title("Quiz Taker App")
         self.quiz_questions = quiz_questions
-        self_current_questions_index = 0  # keep track of current question
+        self.current_question_index = 0  # keep track of current question
         self.total_score = 0 # track score
         self.selected_option = tk.StringVar()  #store answer
 
-        self.question_txt_label = tk.Label(
+        self.question_text_label = tk.Label(
             app_window, text="", wraplength=400, # if text is long, it will wrap to a new line after 400 px
             font=("Arial", 14, "bold") # font, size, and style for label text
         )
-        self.question_txt_label.pack(pady=20) # provide padding
+        self.question_text_label.pack(pady=20) # provide padding
 
         self.answer_option_buttons = [] # empty list that hold choices buttons
         for option_index in range(4): 
@@ -64,6 +64,8 @@ class QuizTakerApp:   # define class
             app_window, text="", font=("Arial", 16, "bold")
         )
         self.final_result_label.pack(pady=10) # display final score
+
+        self.display_next_question()
     
     def display_next_question(self): # display next questions and choices
         self.answer_feedback_label.config(text="")
@@ -98,4 +100,10 @@ class QuizTakerApp:   # define class
         self.final_result_label.config(
             text=(f"Your score: {self.total_score}/{len(self.quiz_questions)}")
         )
+
+app_window = tk.Tk() # run gui
+app_window.geometry("500x450")
+app = QuizTakerApp(app_window, quiz)
+app_window.mainloop()
+
 

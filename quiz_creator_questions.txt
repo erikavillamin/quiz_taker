@@ -1,0 +1,56 @@
+Question: Who's the creator of Python?
+a) Isaac Newton
+b) Guido Van Rossum
+c) Donald Trump
+d) Albert Einstein
+Answer: b
+
+Question: What does the acronym "CPU" stand for in  computing?
+a) Computer Power Unit
+b) Central Power Unit
+c) Control Processing Unit
+d) Central Processing Unit
+Answer: d
+
+Question: Which company developed the Windows operating system?
+a) Apple
+b) Microsoft
+c) Google
+d) IBM
+Answer: b
+
+Question: Who's the creator of Python?
+a) Isaac Newton
+b) Guido Van Rossume
+c) Donald Trump
+d) Albert Einstein
+Answer: b
+
+Question: What does the acronym "CPU" stand for in computing?
+a) Computer Power Unit
+b) Central Power Unit
+c) Control Processing Unit
+d) Central Processing Unit
+Answer: d
+
+Question: Which company developed the Windows operating system?
+a) Apple
+b) Microsoft
+c) Google
+d) IBM
+Answer: b
+
+Question: Which of the following is a volatile memory?
+a) ROM
+b) Hard Disk
+c) RAM
+d) SSD
+Answer: c
+
+Question: Which keyword is used to define a function in Python?
+a) func
+b) def
+c) str
+d) int
+Answer: b
+
