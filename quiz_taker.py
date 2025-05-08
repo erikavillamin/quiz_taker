@@ -39,6 +39,8 @@ class QuizTakerApp:   # define class
         self.current_question_index = 0  # keep track of current question
         self.total_score = 0 # track score
         self.selected_option = tk.StringVar()  #store answer
+        self.timer_secs = 15
+        self.timer_id = None
 
         self.question_text_label = tk.Label(
             app_window, text="", wraplength=400, # if text is long, it will wrap to a new line after 400 px
@@ -57,11 +59,17 @@ class QuizTakerApp:   # define class
             option_button.pack(fill='x', padx=20, pady=2) # place buttons in window with spacing
             self.answer_option_buttons.append(option_button)
 
+        self.timer_label = tk.Label(
+            app_window, text="", font=("Arial", 12),
+            bg=background_color, fg="#FF0000"
+        )
+        self.timer_label.pack()
+
         self.answer_feedback_label = tk.Label(  # label for feedback
             app_window, text="", font=("Arial", 12),
             bg=background_color, fg=text_color
         )
-        self.answer_feedback_label.pack()
+        self.answer_feedback_label.pack(pady=5)
 
         self.submit_button = tk.Button( #submit button
             app_window, text="Submit", command=self.submit_answer,
@@ -81,6 +89,7 @@ class QuizTakerApp:   # define class
         if self.current_question_index >= len(self.quiz_questions):
             self.display_final_score()
             return
+        
         self.selected_option.set(None) # clears selected option before display next question
         current_question = self.quiz_questions[self.current_question_index]
         self.question_text_label.config(
@@ -91,11 +100,27 @@ class QuizTakerApp:   # define class
             self.answer_option_buttons[button_index].config(
                 text=choice, value=choice_value, state=tk.NORMAL
             )
-    def submit_answer(self):  # submit answer
+
+        self.timer_secs = 15
+        self.update_timer()
+
+    def update_timer(self):
+        self.timer_label.config(text=(f"Time left: {self.timer_secs} seconds"))
+        if self.timer_secs > 0:
+            self.timer_secs -= 1
+            self.timer_id = self.app_window.after(1000, self.update_timer)
+        else:
+            self.answer_feedback_label.config(text="Time's up!")
+            self.submit_answer(skip_check=True)
+            
+    def submit_answer(self, skip_check=False):
+        if self.timer_id:
+            self.app_window.after_cancel(self.timer_id)
+            self.timer_id = None
+
         user_answer = self.selected_option.get()
         correct_answer = self.quiz_questions[self.current_question_index]['answer']
-
-        if user_answer == correct_answer: # check 
+        if not skip_check and user_answer ==correct_answer:
             self.total_score += 1
         self.current_question_index += 1
         self.display_next_question()
@@ -106,6 +131,7 @@ class QuizTakerApp:   # define class
             button.pack_forget()
         self.submit_button.pack_forget()
         self.answer_feedback_label.pack_forget()
+        self.timer_label.pack_forget()
 
         total_questions = len(self.quiz_questions)
         percentage = (self.total_score / total_questions) * 100
