@@ -80,5 +80,12 @@ class QuizTakerApp:   # define class
             self.answer_option_buttons[button_index].config(
                 text=choice, value=choice_value, state=tk.NORMAL
             )
-    
+    def submit_answer(self):  # submit answer
+        user_answer = self.selected_option.get()
+        correct_answer = self.quiz_questions[self.current_question_index]['answer']
+
+        if user_answer == correct_answer: # check 
+            self.total_score += 1
+        self.current_question_index += 1
+        self.display_next_question()
 
